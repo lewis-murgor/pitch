@@ -34,5 +34,21 @@
             {% endif %}
         </div>
     </div>
+
+    {%for pitches in pitch%}
+
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h4>{{pitches.title}}</h4>
+                <p>posted on {{pitches.posted.strftime("%d %b %Y")}}</p>
+                <p>{{pitches.text}}</p>
+                <a href="/pitch/{{pitch.id}}">View pitch details</a>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    
 </div>
 {% endblock %}
