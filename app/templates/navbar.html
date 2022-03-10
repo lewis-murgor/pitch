@@ -12,6 +12,9 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
+                <li><a href="{{url_for('main.wise')}}">Wise</a></li>
+                <li><a href="{{url_for('main.pickup_lines')}}">Pick Up Lines</a></li>
+                <li><a href="{{url_for('main.motivation')}}">Motivation</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
