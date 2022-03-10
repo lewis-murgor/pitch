@@ -1,0 +1,31 @@
+{% macro displayPitches(pitches) %}
+
+{%for pitch in pitches%}
+
+<div class="col-md-4">
+    <div class="card">
+        <h3 class="card text-white bg-black">{{pitch.user.username}}</h3>
+        <div class="card-body">
+            <p>posted on {{pitch.posted.strftime("%d %b %Y")}}</p>
+            <strong>{{pitch.title}}</strong>
+            <br>
+            <p>{{pitch.text}}</p>
+            <a href="/pitch/{{pitch.id}}">View pitch details</a>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endmacro %}
+        
+{% macro displayComments(comments) %}
+    {% for comment in comments %}
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 comment-card">
+        <p> {{ comment.comment | truncate(30) }}</p>
+    </div>
+    
+  
+    {% endfor %}
+{% endmacro %}
+        
