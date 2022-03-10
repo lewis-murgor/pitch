@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pitch">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{pitch.title}}</h3>
+                    <p>By:<strong>{{pitch.user.username}}</strong></p>
+                </div>
+                <div class="card-body">
+                    {{pitch.text}}
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 comments">
+            <h2>Comments</h2>
+            <hr>
+            {% if reviews %}
+                {{macro.displayComments(comments)}}
+            {% else%}
+                <h3 class="text-center">This pitch has no comments </h3>
+
+                <a class="btn btn-success btn-lg text-center" href="/pitch/comment/new/{{pitch.id}}"> Write a new comment</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
