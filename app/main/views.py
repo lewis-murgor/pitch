@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from flask_login import login_required
-from ..models import User
+from flask_login import login_required,current_user
+from ..models import User,Pitch,Comment
 from .forms import CommentForm,UpdateProfile
 from .. import db,photos
 
@@ -12,7 +12,33 @@ def index():
     '''
 
     title = 'Pitch Point'
-    return render_template('index.html', title = title)
+    pitches= Pitch.get_pitches() 
+    return render_template('index.html', title = title,pitches = pitches)
+
+@main.route('/pitch/<int:id>')
+def pitch(id):
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    pitch = Pitch.query.get(id)
+    title = f'{pitch.title}'
+    comments = Comment.query.filter_by(pitch_id = id).all()
+    return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
+
+@main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_comment(id):
+    form = CommentForm()
+    pitch = Pitch.query.get(id)
+
+    if form.validate_on_submit():
+        comment = form.comment.data
+        new_comment = Comment(pitch_id=pitch.id,comment = comment, user = current_user)
+        new_comment.save_comment()
+        return redirect(url_for('.pitch',id = pitch.id ))
+
+    title = f'{pitch.title} comment'
+    return render_template('new_comment.html',title = title, comment_form=form, pitch = pitch)
 
 @main.route('/user/<uname>')
 def profile(uname):
