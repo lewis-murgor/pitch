@@ -28,4 +28,25 @@
   
     {% endfor %}
 {% endmacro %}
+
+{% macro displayPitchesInCategories(pitches,id)%}
+
+{% for pitch in pitches %}
+{% if pitch.category_id==id%}
+    <div class="col-md-4">
+        <div class="card">
+            <h3 class="card text-white bg-black">{{pitch.user.username}}</h3>
+            <div class="card-body">
+                <p> Posted on {{pitch.posted.strftime('%d %b %y')}}</p>
+                <strong>{{pitch.title}}</strong>
+                <br>
+                <p>{{pitch.text}}</p>
+                <a href="/pitch/{{pitch.id}}">View pitch details</a>
+            </div>
+        </div>
+    </div>
+{% endif%}
+{% endfor %}
+
+{% endmacro%}
         
