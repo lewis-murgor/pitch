@@ -12,7 +12,7 @@
 This is an application that displays pitches submitted by users. It allows users to create an account and login to the account to comment on the different pitches.
 
 ## Setup/Installation Requirements
-* You can clone this [repository] (https://github.com/lewis-murgor/pitch) by running 'git clone https://github.com/lewis-murgor/pitch' in your terminal.
+* You can clone this repository by running 'git clone https://github.com/lewis-murgor/pitch' in your terminal.
 * Create a virtual environment.
 * Install pip
 * Run 'pip install -r requirements.txt' to install all the dependencies.
@@ -32,7 +32,7 @@ The live link of the project is
 ## Support and contact details
 You can contact me through the email kiplagatlewis29@gmail.com
 ### License
-You can check the licence [here]()
+You can check the licence [here](https://github.com/lewis-murgor/pitch/blob/master/Licence)
 ##
 Copyright (c) 2022 
 ##
