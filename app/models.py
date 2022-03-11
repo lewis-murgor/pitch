@@ -86,23 +86,22 @@ class UpVote(db.Model):
     __tablename__= 'upvotes'
 
     id = db.Column(db.Integer,primary_key = True)
-    upvote = db.Column(db.Integer,default=1)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
 
-    def save_votes(self):
+    def save_vote(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def add_upvotes(cls,id):
-        upvote_pitch = UpVote(user = current_user, pitch_id=id)
-        upvote_pitch.save_upvotes()
+    def get_votes(cls,id):
+        upvotes = UpVote.query.filter_by(id = id).all()
+        return upvotes
 
     @classmethod
-    def get_votes(cls, id):
-        upvote = UpVote.query.filter_by(pitch_id=id).all()
-        return upvote
+    def get_user_vote(cls, user_id):
+        user_vote = UpVote.query.filter_by(id = user_id).all()
+        return user_vote
 
     def __repr__(self):
         return f'User {self.id}'
@@ -111,7 +110,6 @@ class DownVote(db.Model):
     __tablename__ = 'downvotes'
 
     id = db.Column(db.Integer,primary_key = True)
-    downvote = db.Column(db.Integer,default=1)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
 
@@ -120,14 +118,14 @@ class DownVote(db.Model):
         db.session.commit()
 
     @classmethod
-    def add_downvotes(cls,id):
-        downvote_pitch = DownVote(user = current_user, pitch_id=id)
-        downvote_pitch.save_downvotes()
+    def get_votes(cls,id):
+        downvotes = UpVote.query.filter_by(id = id).all()
+        return downvotes
 
     @classmethod
-    def get_votes(cls, id):
-        downvote = DownVote.query.filter_by(pitch_id=id).all()
-        return downvote
+    def get_user_vote(cls, user_id):
+        user_vote = UpVote.query.filter_by(id = user_id).all()
+        return user_vote
 
     def __repr__(self):
         return f'User {self.id}'

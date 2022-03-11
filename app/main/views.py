@@ -1,9 +1,10 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,Pitch,Comment,UpVote
+from ..models import User,Pitch,Comment,UpVote,DownVote
 from .forms import CommentForm,UpdateProfile,PitchForm
 from .. import db,photos
+import markdown2 
 
 @main.route('/')
 def index():
@@ -133,3 +134,50 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/pitch/upvote/<int:id>', methods = ['GET', 'POST'])
+@login_required
+def upvote(id):
+    pitch = Pitch.query.get(id)
+
+    if Pitch is None:
+        abort(404)
+
+    upvote = UpVote.query.filter_by(user_id=current_user.id, pitch_id=id).first()
+    if upvote is not None:
+        db.session.delete(upvote)
+        db.session.commit()
+        return redirect(url_for('.index'))
+    
+    vote = UpVote(user_id=current_user.id, pitch_id=id)
+    db.session.add(vote)
+    db.session.commit()
+
+    return redirect(url_for('.index'))
+
+@main.route('/pitch/downvote/<int:id>', methods = ['GET', 'POST'])
+@login_required
+def downvote(id):
+    pitch = Pitch.query.get(id)
+
+    if Pitch is None:
+        abort(404)
+
+    downvote = DownVote.query.filter_by(user_id=current_user.id, pitch_id=id).first()
+    if downvote is not None:
+        db.session.delete(downvote)
+        db.session.commit()
+        return redirect(url_for('.index'))
+    vote = DownVote(user_id=current_user.id, pitch_id=id)
+    db.session.add(vote)
+    db.session.commit()
+
+    return redirect(url_for('.index'))
+
+@main.route('/comment/<int:id>')
+def single_comment(id):
+    comment = Comment.query.get(id)
+    if comment is None:
+        abort(404)
+    format_comment = markdown2.markdown(comment.comment,extras=["code-friendly", "fenced-code-blocks"])
+    return render_template('comment.html',comment = comment,format_comment = format_comment)

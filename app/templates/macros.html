@@ -3,14 +3,22 @@
 {%for pitch in pitches%}
 
 <div class="col-md-4">
-    <div class="card">
-        <h3 class="card text-white bg-black">{{pitch.user.username}}</h3>
-        <div class="card-body">
-            <p>posted on {{pitch.posted.strftime("%d %b %Y")}}</p>
+    <div class="panel panel-default">
+        <h4 class="panel-heading text-center text-white bg-black"><strong>{{pitch.user.username}}</strong></h4>
+        <div class="panel-body">
+            <p><em> posted on {{pitch.posted.strftime("%d %b %Y")}}</em></p>
             <strong>{{pitch.title}}</strong>
             <br>
-            <p>{{pitch.text}}</p>
+            {{pitch.text}}
+            <br>
+            <br>
+        </div>
+        <div class="panel-footer">
             <a href="/pitch/{{pitch.id}}">View pitch details</a>
+            <br>
+            <br>
+            <span><a href="{{url_for('main.upvote',id = pitch.id)}}"><button class="btn btn-sm btn-success">upvote</button></a> {{pitch.upvotes.count()}}</span>
+            <span><a href="{{url_for('main.downvote',id = pitch.id)}}"><button class="btn btn-sm btn-danger">downvote</button></a> {{pitch.downvotes.count()}}</span>
         </div>
     </div>
 </div>
@@ -24,6 +32,15 @@
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 comment-card">
         <p> {{ comment.comment | truncate(30) }}</p>
     </div>
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-4 col-lg-4">
+            <h4>Author</h4>
+            <p>{{review.user.username}}</p>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8">
+            <h2> <a href="{{url_for('main.single_review',id=review.id)}}">{{review.movie_title}}</a> </h2>
+        </div>
+    </div>
     
   
     {% endfor %}
@@ -34,14 +51,22 @@
 {% for pitch in pitches %}
 {% if pitch.category_id==id%}
     <div class="col-md-4">
-        <div class="card">
-            <h3 class="card text-white bg-black">{{pitch.user.username}}</h3>
-            <div class="card-body">
+        <div class="panel panel-default">
+            <h4 class="panel-heading text-center"><strong>{{pitch.user.username}}</strong></h4>
+            <div class="panel-body">
                 <p> Posted on {{pitch.posted.strftime('%d %b %y')}}</p>
                 <strong>{{pitch.title}}</strong>
                 <br>
-                <p>{{pitch.text}}</p>
+                {{pitch.text}}
+                <br>
+                <br>
+            </div>
+            <div class="panel-footer">
                 <a href="/pitch/{{pitch.id}}">View pitch details</a>
+                <br>
+                <br>
+                <span> <a href="{{url_for('main.upvote',id = pitch.id)}}"><button class="btn btn-sm btn-success">upvote</button></a> {{pitch.upvotes.count()}}</span>
+                <span> <a href="{{url_for('main.downvote',id = pitch.id)}}"><button class="btn btn-sm btn-danger">downvote</button></a> {{pitch.downvotes.count()}}</span>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@ from wtforms.validators import InputRequired
 
 class CommentForm(FlaskForm):
 
-    comment = TextAreaField('Comment',validators=[InputRequired()])
+    comment = TextAreaField('Comment')
     submit = SubmitField('Submit')
 
 class UpdateProfile(FlaskForm):
