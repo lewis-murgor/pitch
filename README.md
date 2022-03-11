@@ -4,9 +4,6 @@
 
 #### By **Lewis Murgor**
 
-## Below is a part of the project.
-
-
 
 ## Description
 This is an application that displays pitches submitted by users. It allows users to create an account and login to the account to comment on the different pitches.
@@ -21,7 +18,7 @@ This is an application that displays pitches submitted by users. It allows users
 The application has no known bugs.
 
 ## Live Site
-The live link of the project is 
+The live link of the project is  https://pitch-point-29.herokuapp.com/
 
 ## Technologies Used
 * Python
