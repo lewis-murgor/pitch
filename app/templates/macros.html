@@ -4,7 +4,9 @@
 
 <div class="col-md-4">
     <div class="panel panel-default">
-        <h4 class="panel-heading text-center text-white bg-black"><strong>{{pitch.user.username}}</strong></h4>
+        <div class="panel-heading">
+            <h4 class=" text-center"><strong>{{pitch.user.username}}</strong></h4>
+        </div>
         <div class="panel-body">
             <p><em> posted on {{pitch.posted.strftime("%d %b %Y")}}</em></p>
             <strong>{{pitch.title}}</strong>
@@ -52,7 +54,10 @@
 {% if pitch.category_id==id%}
     <div class="col-md-4">
         <div class="panel panel-default">
-            <h4 class="panel-heading text-center"><strong>{{pitch.user.username}}</strong></h4>
+            <div class="panel-heading" style="background-color: black;">
+                <h4 class="text-center"><strong>{{pitch.user.username}}</strong></h4>
+            </div>
+            
             <div class="panel-body">
                 <p> Posted on {{pitch.posted.strftime('%d %b %y')}}</p>
                 <strong>{{pitch.title}}</strong>
@@ -61,7 +66,7 @@
                 <br>
                 <br>
             </div>
-            <div class="panel-footer">
+            <div class="panel-footer" style="background-color: black;">
                 <a href="/pitch/{{pitch.id}}">View pitch details</a>
                 <br>
                 <br>
