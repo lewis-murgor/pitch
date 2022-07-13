@@ -3,15 +3,15 @@
 
 {% block styles%}
     {{ super() }}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bad Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bad Script|Beau Rivage">
     <link rel="stylesheet" href="{{url_for('static',filename='css/auth.css')}}">
 {% endblock %}
 
 {% block content %}
-<div class="container"> 
+<div class="container login"> 
     <div class="row">
-      <div class= "col-md-2"> </div>
-      <div class="col-md-8">
+      <div class= "col-md-4"></div>
+      <div class="col-md-4">
       <!--Flash message -->
       {% for message in get_flashed_messages() %}
         <div class="alert alert-danger">
@@ -19,11 +19,15 @@
         {{ message }}
         </div>
       {% endfor %}
-      <!-- Login form -->
-      {{wtf.quick_form(login_form)}}
-      <p> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
+      <div class="panel panel-default authentication">
+        <h2>Pitch Point</h2>
+        <div class="panel-body">
+          {{wtf.quick_form(login_form)}}
+          <p> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
+        </div>
+      </div>
      </div>
-     <div clas="col-md-2"> </div>
+     <div clas="col-md-4"></div>
     </div>
 </div>
 
