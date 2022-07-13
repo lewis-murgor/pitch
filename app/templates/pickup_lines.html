@@ -3,21 +3,18 @@
 
 {% block styles%}
     {{ super() }}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bad Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bad Script|Calligraffitti">
     <link rel="stylesheet" href="{{url_for('static',filename='css/pickup_lines.css')}}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h3 class="text-center">Pick Up Lines</h3>
-    <hr>
-    <div>
-        <a class="btn btn-primary text-center" href="/pitch/new/"> Create A Pitch</a>
-    </div>
-    <br>
-    <div>
-        {{ macro.displayPitchesInCategories(pitches, 2)}}
-    </div>
+<h2>Pick Up Lines</h2>
+<div class="pickup_lines">
+    <div class="lines">
+        <div>
+            {{ macro.displayPitchesInCategories(pitches, 2)}}
+        </div>
+    </div>  
 </div>
 
 {% endblock %}

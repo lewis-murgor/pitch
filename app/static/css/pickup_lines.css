@@ -1,10 +1,24 @@
-h3 {
+h2 {
     text-align: center;
-    color: darkgoldenrod;
+    color: white;
+    font-family: Calligraffitti;
 }
 body {
-    background-color: snow;
+    background-color: rgba(19, 18, 18, 0.699);
 }
 .pitch-point {
     font-family: Bad Script;
+}
+.pickup_lines {
+    width: 100%;
+    height: 100vh;
+    background-color: #80808049;
+}
+.lines {
+    height: 100vh;
+    background-image: url('https://iheartintelligence.com/wp-content/uploads/2019/01/bob-marley-11-quotes-5.jpg');
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
 }
