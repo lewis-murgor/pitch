@@ -11,7 +11,15 @@
 
 <div class="container">
     <div class="row">
-        {{ wtf.quick_form(pitch_form) }}
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="panel panel-default new-pitch">
+                <div class="panel-body pitch-form">
+                    {{ wtf.quick_form(pitch_form) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 

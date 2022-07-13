@@ -9,13 +9,19 @@
 
 {% block content %}
 <div class="container">
-    <div class="col-md-8">
-        <h4>{{pitch.title}}</h4>
-        {{pitch.text}}
-    </div>
-    <div class="col-md-4">
-        {{ wtf.quick_form(comment_form) }}
-        {{simplemde.load}}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="new-pitch">
+                <p class="comment"><em>Commenting on {{pitch.user.username}}'s pitch, <strong>{{pitch.title}}</strong></em></p>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {{ wtf.quick_form(comment_form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 
