@@ -4,23 +4,18 @@
 
 <div class="col-md-4">
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class=" text-center"><strong>{{pitch.user.username}}</strong></h4>
-        </div>
         <div class="panel-body">
-            <p><em> posted on {{pitch.posted.strftime("%d %b %Y")}}</em></p>
-            <strong>{{pitch.title}}</strong>
-            <br>
+            <h3 class="title"><strong>{{pitch.title}}</strong></h3>
             {{pitch.text}}
             <br>
             <br>
-        </div>
-        <div class="panel-footer">
-            <a href="/pitch/{{pitch.id}}">View pitch details</a>
+            <span><a href="{{url_for('main.upvote',id = pitch.id)}}"><i class="fa fa-thumbs-up" style="font-size:18px;" aria-hidden="true"></i></a> {{pitch.upvotes.count()}}</span>
+            <span><a href="{{url_for('main.downvote',id = pitch.id)}}"><i class="fa fa-thumbs-down" style="font-size:18px;" aria-hidden="true"></i></a> {{pitch.downvotes.count()}}</span>
+            <hr>
+            <strong><em>{{pitch.user.username}}</em></strong>
             <br>
-            <br>
-            <span><a href="{{url_for('main.upvote',id = pitch.id)}}"><button class="btn btn-sm btn-success">upvote</button></a> {{pitch.upvotes.count()}}</span>
-            <span><a href="{{url_for('main.downvote',id = pitch.id)}}"><button class="btn btn-sm btn-danger">downvote</button></a> {{pitch.downvotes.count()}}</span>
+            <em>{{pitch.posted.strftime("%d %b %Y")}}</em>
+            <a href="/pitch/{{pitch.id}}"><button class="details">Pitch</button></a>
         </div>
     </div>
 </div>
@@ -35,24 +30,18 @@
 {% if pitch.category_id==id%}
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: black;">
-                <h4 class="text-center"><strong>{{pitch.user.username}}</strong></h4>
-            </div>
-            
             <div class="panel-body">
-                <p> Posted on {{pitch.posted.strftime('%d %b %y')}}</p>
-                <strong>{{pitch.title}}</strong>
-                <br>
+                <h3 class="title"><strong>{{pitch.title}}</strong></h3>
                 {{pitch.text}}
                 <br>
                 <br>
-            </div>
-            <div class="panel-footer" style="background-color: black;">
-                <a href="/pitch/{{pitch.id}}">View pitch details</a>
+                <span><a href="{{url_for('main.upvote',id = pitch.id)}}"><i class="fa fa-thumbs-up" style="font-size:18px;" aria-hidden="true"></i></a> {{pitch.upvotes.count()}}</span>
+                <span><a href="{{url_for('main.downvote',id = pitch.id)}}"><i class="fa fa-thumbs-down" style="font-size:18px;" aria-hidden="true"></i></a> {{pitch.downvotes.count()}}</span>
+                <hr>
+                <strong><em>{{pitch.user.username}}</em></strong>
                 <br>
-                <br>
-                <span> <a href="{{url_for('main.upvote',id = pitch.id)}}"><button class="btn btn-sm btn-success">upvote</button></a> {{pitch.upvotes.count()}}</span>
-                <span> <a href="{{url_for('main.downvote',id = pitch.id)}}"><button class="btn btn-sm btn-danger">downvote</button></a> {{pitch.downvotes.count()}}</span>
+                <em>{{pitch.posted.strftime("%d %b %Y")}}</em>
+                <a href="/pitch/{{pitch.id}}"><button class="details">Pitch</button></a>
             </div>
         </div>
     </div>

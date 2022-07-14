@@ -31,4 +31,14 @@ body {
     justify-content: center;
     align-items: center;
 }
+.title {
+    font-family: Euphoria Script;
+}
+.details {
+    float: right;
+}
+button {
+    background-color: #152230;
+    color: white;
+}
 
