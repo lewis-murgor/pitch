@@ -9,52 +9,46 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <!-- displaying  Username-->
         <div class="col-md-4">
-            <h3> {{user.username| capitalize}} </h3>
+            {% if user.profile_pic_path %}
+                <img class="avatar" src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+            {%else%}
+                <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" width="250px"  alt="profile photo">
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <h2><strong> {{user.username| capitalize}}</strong> </h2> 
+            <br>
+            <br>
             <!--Displaying user bio-->
             {% if user.bio %}
                 <p> {{user.bio}}</p>
             {%else%}
-                <p> {{user.username| capitalize}} has no bio </p>
+                <p></p>
             {% endif %}
         </div>
-        <!--Display profile photo-->
-        <div class="col-md-4">
-
-            {% if user.profile_pic_path %}
-                <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
-            {%else%}
-                <p>No profile picture</p>
-            {% endif %}
-        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-4"></div>
         <div class="col-md-4">
             {% if user == current_user %}
-                <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
-                <br>
-                <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
-                    <input type="file"  name="photo" class="form-control" required>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{{url_for('main.update_profile',uname=user.username)}}"><button style="background-color: #0D1B2A; color: white;">Edit Profile</button></a>
                     <br>
-                    <input type="submit" class="btn btn-info">
-                </form>
+                    <br>
+                    <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
+                        <input type="file"  name="photo" class="form-control" required>
+                        
+                        <input type="submit" class="btn btn-info">
+                    </form>
+                </div>
+            </div>
             {% endif %}
         </div>
+        <div class="col-md-4"></div>
     </div>
-
-    {%for pitches in pitch%}
-
-    <div class="row">
-        <div class="card">
-            <div class="card-body">
-                <h4>{{pitches.title}}</h4>
-                <p>posted on {{pitches.posted.strftime("%d %b %Y")}}</p>
-                <p>{{pitches.text}}</p>
-                <a href="/pitch/{{pitch.id}}">View pitch details</a>
-            </div>
-        </div>
-    </div>
-
-    {% endfor %}
-    
 </div>
 {% endblock %}
