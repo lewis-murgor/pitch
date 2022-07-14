@@ -78,6 +78,18 @@ def new_pitch():
     title = 'Add Pitch'
     return render_template('new_pitch.html',title = title, pitch_form = form)
 
+@main.route('/delete_pitch/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_pitch(id):
+    pitch = Pitch.query.get(id)
+
+    if pitch is None:
+        abort(404)
+
+    db.session.delete(pitch)
+    db.session.commit()
+    return redirect (url_for('main.index'))
+
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
 @login_required
@@ -93,6 +105,18 @@ def new_comment(id):
 
     title = f'{pitch.title} comment'
     return render_template('new_comment.html',title = title, comment_form=form, pitch = pitch)
+
+@main.route('/delete_comment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(id):
+    comment =Comment.query.get(id)
+
+    if comment is None:
+        abort(404)
+
+    db.session.delete(comment)
+    db.session.commit()
+    return redirect (url_for('.pitch',id = pitch.id ))
 
 
 @main.route('/user/<uname>')
