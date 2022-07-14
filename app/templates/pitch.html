@@ -3,36 +3,47 @@
 
 {% block styles%}
     {{ super() }}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bad Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bad Script|Bilbo Swash Caps">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="{{url_for('static',filename='css/pitch.css')}}">
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
-    
-    <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pitch">
-            <div class="card">
-                <div class="card-header">
-                    <h3>{{pitch.title}}</h3>
-                    <p>By:<strong>{{pitch.user.username}}</strong></p>
+<div class="pitch">
+    <div class="single-pitch">
+        <br><br><br><br><br>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h3 class="text-center"><strong>{{pitch.title}}</strong></h3>
+                <h5>By:<em>{{pitch.user.username}}</em></h5>
+                <h5><em>{{pitch.category.name}}</em></h5>
+                <p>{{pitch.text}}</p>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <a href="/pitch/comment/new/{{pitch.id}}"><i class="fa fa-comment" style="font-size:40px;" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/delete_pitch/{{pitch.id}}"><i class="fa fa-trash" style="font-size:40px;" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-2"></div>
                 </div>
-                <div class="card-body">
-                    {{pitch.text}}
+                <hr>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        {%for comment in comments%}
+                        <h4><em>{{comment.user.username}}:</em></h4>
+                        <h4 class="style">{{comment.comment}}</h4>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-4"></div>
                 </div>
+                <hr> 
             </div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 comments">
-            <h2>Comments</h2>
-            <hr>
-            {% if reviews %}
-                {{macro.displayComments(comments)}}
-            {% else%}
-                <h3 class="text-center">This pitch has no comments </h3>
-
-                <a class="btn btn-success btn-lg text-center" href="/pitch/comment/new/{{pitch.id}}"> Write a new comment</a>
-            {% endif %}
+            <div class="col-md-3"></div>
         </div>
     </div>
 </div>
