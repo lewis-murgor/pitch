@@ -106,18 +106,6 @@ def new_comment(id):
     title = f'{pitch.title} comment'
     return render_template('new_comment.html',title = title, comment_form=form, pitch = pitch)
 
-@main.route('/delete_comment/<int:id>', methods=['GET', 'POST'])
-@login_required
-def delete_comment(id):
-    comment =Comment.query.get(id)
-
-    if comment is None:
-        abort(404)
-
-    db.session.delete(comment)
-    db.session.commit()
-    return redirect (url_for('.pitch',id = pitch.id ))
-
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -126,7 +114,8 @@ def profile(uname):
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user)
+    title = f'{user.username}'
+    return render_template("profile/profile.html", user = user,title = title)
 
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
@@ -146,7 +135,9 @@ def update_profile(uname):
 
         return redirect(url_for('.profile',uname=user.username))
 
-    return render_template('profile/update.html',form =form)
+    title = 'Update Profile'
+
+    return render_template('profile/update.html',form =form,title = title)
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
