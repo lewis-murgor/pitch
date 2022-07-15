@@ -27,7 +27,7 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql-clean-09518'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://cpbbuoylmyefsw:619fec4de279ecc1271390242e13e247ecefb1978e097ea1a85416da525b70cb@ec2-34-235-198-25.compute-1.amazonaws.com:5432/d1ocjc02au3b88'
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lewis:lewis29@localhost/pitch_test'
